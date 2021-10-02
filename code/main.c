@@ -172,134 +172,14 @@ int main()
 	int i,flg1;
 	unsigned char sec, min, hour;
 	unsigned char min2,hour2,min3,hour3;
-	sw4 = 0;
-	sw5 = 1;
-
-	//global=inttochar(56);
-//	hour2 = 0x09;
-//	min2 = 0x08;
+	//sw4 = 0;
+	//sw5 = 1;
 	hour3 = 0x09;
 	min3 = 0x10;
 
 
 	init_lcd();
-//	DS1307_settime(0x22,0x31,0x06);		/* Set Time (hh:mm:ss) */
-					 
-	lcd_cmd(0x01);		
-	lcd_cmd(0x80);
-	lcd_data('E');lcd_data('N');lcd_data('T');lcd_data('E');lcd_data('R');lcd_data(' ');lcd_data('S');lcd_data('T');lcd_data('A');lcd_data('R');lcd_data('T');lcd_data(' ');lcd_data('T');lcd_data('I');lcd_data('M');lcd_data('E');
-	delay_lcd(2000);
-	for(i=0;i<2;i++)
-	{
-		lcd_cmd(0x01);
-		lcd_cmd(0x80);
-		if(i==0)
-		{
-			lcd_data('H');lcd_data('O');lcd_data('U');lcd_data('R');
-		}						
-		else if(i==1)
-		{
-			lcd_data('M');lcd_data('I');lcd_data('N');lcd_data(' ');	
-		}						
-		
-		credit[i+1]=0;
-		flg1=0;
-		disp_val(0xC0,credit[i+1],4);
-		while(flg1==0)
-		{
-			if(i==0)
-			{
-				if(sw1==0 && credit[i+1]<23)
-				{
-					credit[i+1]+=1;
-					disp_val(0xC0,credit[i+1],4);				
-					delay_lcd(200);
-				}
-			}
-			else
-			{
-				if(sw1==0 && credit[i+1]<59)
-				{
-					credit[i+1]+=1;
-					disp_val(0xC0,credit[i+1],4);				
-					delay_lcd(200);
-				}
-			
-			}
-			if(sw2==0 && credit[i+1]>0)
-			{
-				credit[i+1]-=1;
-				disp_val(0xC0,credit[i+1],4);
-				delay_lcd(200);
-			}
-			if(sw3==0)
-			{
-				flg1=1;
-				delay_lcd(200);
-			}		
-		}
-	}
-	//
-	lcd_cmd(0x01);		
-	lcd_cmd(0x80);
-	lcd_data('E');lcd_data('N');lcd_data('T');lcd_data('E');lcd_data('R');lcd_data(' ');lcd_data('S');lcd_data('T');lcd_data('O');lcd_data('P');lcd_data(' ');lcd_data('T');lcd_data('I');lcd_data('M');lcd_data('E');
-	delay_lcd(2000);
-	for(i=0;i<2;i++)
-	{
-		lcd_cmd(0x01);
-		lcd_cmd(0x80);
-		if(i==0)
-		{
-			lcd_data('H');lcd_data('O');lcd_data('U');lcd_data('R');
-		}						
-		else if(i==1)
-		{
-			lcd_data('M');lcd_data('I');lcd_data('N');lcd_data(' ');	
-		}						
-		
-		credit2[i+1]=0;
-		flg1=0;
-		disp_val(0xC0,credit2[i+1],4);
-		while(flg1==0)
-		{
-			if(i==0)
-			{
-				if(sw1==0 && credit2[i+1]<23)
-				{
-					credit2[i+1]+=1;
-					disp_val(0xC0,credit2[i+1],4);				
-					delay_lcd(200);
-				}
-			}
-			else
-			{
-				if(sw1==0 && credit2[i+1]<59)
-				{
-					credit2[i+1]+=1;
-					disp_val(0xC0,credit2[i+1],4);				
-					delay_lcd(200);
-				}
-			
-			}
-			if(sw2==0 && credit2[i+1]>0)
-			{
-				credit2[i+1]-=1;
-				disp_val(0xC0,credit2[i+1],4);
-				delay_lcd(200);
-			}
-			if(sw3==0)
-			{
-				flg1=1;
-				delay_lcd(200);
-			}		
-		}
-	}
-	//
-	hour2 = inttochar(credit[1]);
-	min2  = inttochar(credit[2]);
-	hour3 = inttochar(credit2[1]);
-	min3  = inttochar(credit2[2]);
-
+  //DS1307_settime(0x17,0x48,0x06);		/* Set Time (hh:mm:ss)  Uncomment & Program time, then comment and program .code*/
 	lcd_cmd(0x01);
 	while(1)
 	{	 	
@@ -307,51 +187,6 @@ int main()
 		min   = DS1307_get(MIN);	
 		hour  = DS1307_get(HOUR);
 		display_time(hour,min,sec);
-		/*if(global==0)
-		{
-			if((min2==min) &&(hour2==hour))
-			{	
-				lcd_cmd(0xC0);						
-				lcd_data('S');lcd_data('Y');lcd_data('S');lcd_data('T');lcd_data('E');lcd_data('M');lcd_data(' ');lcd_data('O');lcd_data('N');
-				delay_lcd(2000);
-				lcd_cmd(0xC0);						
-				lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');
-				global=1;
-			}
-		}
-	
-		if(global==1)
-		{				 
-			if(IR==1)
-			{
-				lcd_cmd(0xC0);
-				lcd_data('D');lcd_data('E');lcd_data('T');lcd_data('E');lcd_data('C');lcd_data('T');lcd_data('E');lcd_data('D');lcd_data(' ');
-				sw4=1;
-				delay_lcd(500);
-				sw4=0;
-				delay_lcd(500);
-				sw5=0;
-				delay_lcd(500);
-				sw5=1;
-				lcd_cmd(0xC0);						
-				delay_lcd(500);
-				lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');			
-			}
-			
-		}
-		if(global==1)
-		{
-			if((min3==min) &&(hour3==hour))
-			{	
-				lcd_cmd(0xC0);						
-				lcd_data('S');lcd_data('Y');lcd_data('S');lcd_data('T');lcd_data('E');lcd_data('M');lcd_data(' ');lcd_data('O');lcd_data('F');lcd_data('F');
-				delay_lcd(2000);
-				lcd_cmd(0xC0);						
-				lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');lcd_data(' ');
-				global=0;
-			}
-		} */
-				
 	}					   	
 	return 0;
 }

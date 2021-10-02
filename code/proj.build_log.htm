@@ -18,14 +18,18 @@ Hex Converter:   OH51.exe V2.7.0.0
 CPU DLL:         S8051.DLL V3.122.0.0
 Dialog DLL:      DP51.DLL V2.66.0.0 
 <h2>Project:</h2>
-M:\Technology\Projects\8051\2021\RTC Based Clock\codes\code3\proj.uvproj
+M:\Technology\Projects\8051\2021\8051 RTC Based Clock\codes\code3\8051-RTC-Clock-I2C\code\proj.uvproj
 Project File Date:  09/20/2021
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
 compiling main.c...
 main.c(1): warning C500: SERIAL NUMBER EXPIRED
-main.c(356): warning C294: unreachable code
+main.c(172): warning C280: 'i': unreferenced local variable
+main.c(172): warning C280: 'flg1': unreferenced local variable
+main.c(174): warning C280: 'min2': unreferenced local variable
+main.c(174): warning C280: 'hour2': unreferenced local variable
+main.c(312): warning C294: unreachable code
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?I2C_ACK?MAIN
@@ -37,9 +41,13 @@ linking...
     SEGMENT: ?PR?_DS1307_SETDATE?MAIN
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_LCD_STRING?MAIN
-Program Size: data=57.1 xdata=0 code=1884
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISP_VAL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_INTTOCHAR?MAIN
+Program Size: data=61.1 xdata=0 code=1118
 creating hex file from "proj"...
-"proj" - 0 Error(s), 7 Warning(s).
+"proj" - 0 Error(s), 13 Warning(s).
 Build Time Elapsed:  00:00:01
 </pre>
 </body>
